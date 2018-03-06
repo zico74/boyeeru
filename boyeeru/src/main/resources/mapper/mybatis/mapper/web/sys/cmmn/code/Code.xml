@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.boyeeru.adios.web.mapper.sys.cmmn.code.CodeMapper">
+	<select id="findByCode" parameterType="jqGrid" resultType="code">
+	SELECT *
+      FROM
+         ( SELECT PAGE.*
+                , ROWNUM AS NUM
+             FROM
+                ( SELECT *
+                    FROM TB_CMMN_CODE
+                   ORDER BY ${sidx} ${sord}
+                ) PAGE
+            WHERE ROWNUM &lt;= ${endCount}
+          ) PAGE
+      WHERE NUM &gt;= ${startCount}
+	</select>
+	
+	<select id="findByCodeTotal" parameterType="jqGrid" resultType="int">
+    SELECT COUNT(*)
+      FROM TB_CMMN_CODE
+    </select>
+</mapper>
