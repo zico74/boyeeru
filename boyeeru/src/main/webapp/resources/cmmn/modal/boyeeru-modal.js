@@ -93,6 +93,6 @@
 			},
 			buttons : [
 			],
-			theme : 'a'
+			theme : ''
 	}
 })(jQuery, window, document);
