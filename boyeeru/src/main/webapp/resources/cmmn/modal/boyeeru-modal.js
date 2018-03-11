@@ -29,10 +29,8 @@
 			
 			tmplat = self._getTmplat();
 			
-			console.log(tmplat);
-			
 			if (opt.buttons) {
-				
+				self._addBtns();
 			}
 			
 			self.$element.append(tmplat);
@@ -87,19 +85,20 @@
 			dialogHtml = $(dialogHtml).append(contHtml);
 			modalHtml = $(modalHtml).append(dialogHtml);
 			
-			self.$header = modalHtml.find('.modal-header');
-			self.$body = modalHtml.find('.modal-body');
-			self.$footer = modalHtml.find('.modal-footer');
-			
+			this.$header = modalHtml.find('.modal-header');
+			this.$body = modalHtml.find('.modal-body');
+			this.$footer = modalHtml.find('.modal-footer');
+
 			return modalHtml;
 		},
 		_addBtns : function() {
 			var self = this,
 				$target = self.$footer.find(".modal-footer-btn"),
-				btns = self.optns;
+				btns = self.optns.buttons;
 			
 			$.each(btns, function(idx, obj) {
-				$target.append(obj.html);
+					$target.append(obj.html);
+					$target.children().eq(idx).on('click', $.proxy(obj.callback, self));
 			});
 		},
 		_clear : function() {
