@@ -43,9 +43,15 @@
 	<!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-
-<script>
+<div id="test"></div>
+<script type="text/javascript">
 	$(function() {
-		$("#modal-info").modal();
+		//$("#modal-info").modal();
+		
+		$('#test').bkModal({
+			body : {
+				html : '<i class="fas fa-spinner fa-spin"></i> 잠시만 기다려주세요.'
+			}
+		});
 	});
 </script>

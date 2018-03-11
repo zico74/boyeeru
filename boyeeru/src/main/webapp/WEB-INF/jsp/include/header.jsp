@@ -47,3 +47,6 @@
 <!-- utils -->
 <script type="text/javascript" src="<c:url value='/resources/cmmn/utils/boyeeru-utils.js' />"></script>
 <script type="text/javascript" src="<c:url value='/resources/cmmn/grid/boyeeru-grid.js' />"></script>
+
+<!-- bkModal -->
+<script type="text/javascript" src="<c:url value='/resources/cmmn/modal/boyeeru-modal.js' />"></script>
