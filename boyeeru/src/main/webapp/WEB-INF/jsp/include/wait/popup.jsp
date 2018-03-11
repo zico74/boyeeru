@@ -51,7 +51,19 @@
 		$('#test').bkModal({
 			body : {
 				html : '<i class="fas fa-spinner fa-spin"></i> 잠시만 기다려주세요.'
-			}
+			},
+			buttons : [
+				{html : '<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>',
+					callback : function(e) {
+						console.log(e);
+						console.log(1);
+					}}
+				,{html : '<button type="button" class="btn btn-default pull-left">zz</button>',
+					callback : function(e) {
+						console.log(e);
+						console.log(2);
+					}}
+			]
 		});
 	});
 </script>
