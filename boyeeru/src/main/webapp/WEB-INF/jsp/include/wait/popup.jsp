@@ -43,12 +43,11 @@
 	<!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-<div id="test"></div>
+<div class="test"></div>
 <script type="text/javascript">
 	$(function() {
 		//$("#modal-info").modal();
-		
-		$('#test').bkModal({
+		$('.test').bkModal({
 			body : {
 				html : '<i class="fas fa-spinner fa-spin"></i> 잠시만 기다려주세요.'
 			},

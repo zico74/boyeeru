@@ -25,7 +25,7 @@
 				opt = self.optns,
 				tmplat;
 			
-			self._clear();
+			//self._clear();
 			
 			tmplat = self._getTmplat();
 			
