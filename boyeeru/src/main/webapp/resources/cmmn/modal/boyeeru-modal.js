@@ -123,7 +123,6 @@
 			if (typeof option === 'string') {
 				data[option].apply(data, args);
 			}
-			//
 		});
 	};
 	
