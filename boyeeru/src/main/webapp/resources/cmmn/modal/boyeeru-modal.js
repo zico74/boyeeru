@@ -182,6 +182,8 @@
 			return $el;
 		},
 		hide : function($el) {
+			
+			
 			$el.find('button.close').trigger('click');
 		}
 	});
