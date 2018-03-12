@@ -49,4 +49,7 @@
 <script type="text/javascript" src="<c:url value='/resources/cmmn/grid/boyeeru-grid.js' />"></script>
 
 <!-- bkModal -->
+<link
+	href="<c:url value='/resources/cmmn/modal/boyeeru-modal.css' />"
+	rel="stylesheet" type="text/css">
 <script type="text/javascript" src="<c:url value='/resources/cmmn/modal/boyeeru-modal.js' />"></script>

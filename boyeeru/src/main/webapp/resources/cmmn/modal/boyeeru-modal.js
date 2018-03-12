@@ -1,7 +1,7 @@
 /**
  * 
  */
-(function($, window, document) {
+;(function($, window, document) {
 	'use strict';
 
 	var BkModal = function(el, optns) {
@@ -12,8 +12,6 @@
 		this.$footer = null;	
 		
 		this.optns = optns;
-		
-		console.log(optns);
 		
 		this._init();
 	}
@@ -34,7 +32,8 @@
 			}
 			
 			self.$element.append(tmplat);
-			self.$element.find(".modal").modal();
+			
+			self.$element.find(".modal").addClass(self.optns.theme).modal();
 		},
 		_getTmplat : function() {
 			var modalHtml = '<div class="modal modal-cstmzng" data-backdrop="static"></div>',
@@ -89,6 +88,16 @@
 			this.$body = modalHtml.find('.modal-body');
 			this.$footer = modalHtml.find('.modal-footer');
 
+			if (!opt.header.isView) {
+				this.$header.hide();
+			}
+			if (!opt.body.isView) {
+				this.$body.hide();
+			}
+			if (!opt.footer.isView) {
+				this.$footer.hide();
+			}
+			
 			return modalHtml;
 		},
 		_addBtns : function() {
@@ -144,5 +153,37 @@
 	};
 	
 	$.fn.bkModal.Constructor = BkModal;
+	
+	$.bkNotification = $.bkNotification || {};
+	
+	$.extend($.bkNotification, {
+		show : function(optns) {
+			var d = new Date(),
+				id = d.getMilliseconds(),
+				$el = $('<div />', {
+					id : id
+				}),
+				i = '<div class="fa-' + optns.size + 'x"><i class="fas ' + optns['class'] + '"></i> ' + optns.text + '</div>';
+			
+			$('body').append($el);
+			
+			$el.bkModal({
+				header : {
+					isView : true
+				},
+				body : {
+					html : i
+				},
+				footer : {
+					isView : false
+				}
+			});
+			
+			return $el;
+		},
+		hide : function($el) {
+			$el.find('button.close').trigger('click');
+		}
+	});
 	
 })(jQuery, window, document);

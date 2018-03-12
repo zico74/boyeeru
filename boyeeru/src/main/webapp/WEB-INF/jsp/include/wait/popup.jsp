@@ -64,5 +64,13 @@
 					}}
 			]
 		});
+
+		var $info = $.bkNotification.show({
+			'size' : 2,
+			'class' : 'fa-spinner fa-spin',
+			'text' : 'adfads'
+		});
+		
+		$.bkNotification.hide($info);
 	});
 </script>
