@@ -85,7 +85,7 @@
 						</a>
 						<ul class="treeview-menu">
 							<li>
-								<a class='menu-sub' href="<c:url value='/utils/jqGrid/default' />">
+								<a class='menu-sub' href="<c:url value='/utils/jqgrid/normal' />">
 									<i class="fa fa-circle-o"></i>
 									default
 								</a>
@@ -188,6 +188,11 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$(".sidebar-menu .menu-sub").on("click", function(e) {
+			$.bkNotification.show({
+				size : 1,
+				'class' : 'fa-circle-notch fa-spin',
+				text : '잠시만 기다려주세요.'
+			});
 			//Utils.stopEvent(e);
 
 // 			var that = this, url = $(that).attr('href');

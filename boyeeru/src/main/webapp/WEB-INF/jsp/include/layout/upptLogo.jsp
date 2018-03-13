@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 
 <!-- Logo -->
-<a href="<c:url value='' />" class="logo">
+<a href="<c:url value='/' />" class="logo">
 	<!-- mini logo for sidebar mini 50x50 pixels -->
 	<span class="logo-mini">
 		<b>보</b>
