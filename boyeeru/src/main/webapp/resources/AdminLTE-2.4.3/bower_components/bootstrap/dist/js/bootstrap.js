@@ -1050,6 +1050,10 @@ if (typeof jQuery === 'undefined') {
         .one('bsTransitionEnd', $.proxy(this.hideModal, this))
         .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
       this.hideModal()
+      
+      // lmw
+      // 다이얼로드 완전히 제거
+      this.$element.parent('div').remove();
   }
 
   Modal.prototype.enforceFocus = function () {

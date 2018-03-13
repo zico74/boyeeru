@@ -169,7 +169,7 @@
 			
 			$el.bkModal({
 				header : {
-					isView : true
+					isView : false
 				},
 				body : {
 					html : i

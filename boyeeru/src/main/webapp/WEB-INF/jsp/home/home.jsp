@@ -251,9 +251,6 @@
 
   <!-- Control Sidebar -->
   <%@ include file="/WEB-INF/jsp/include/layout/rghtSlider.jsp"%>
-  
-  <!-- wait popup -->
-  <%@ include file="/WEB-INF/jsp/include/wait/popup.jsp"%>
 
 </div>
 <!-- ./wrapper -->
