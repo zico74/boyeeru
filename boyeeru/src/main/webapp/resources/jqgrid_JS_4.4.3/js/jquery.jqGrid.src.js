@@ -644,6 +644,7 @@ $.extend($.jgrid,{
 
 $.fn.jqGrid = function( pin ) {
 	if (typeof pin === 'string') {
+		console.log(pin);
 		var fn = $.jgrid.getMethod(pin);
 		if (!fn) {
 			throw ("jqGrid - No such method: " + pin);
@@ -1833,7 +1834,7 @@ $.fn.jqGrid = function( pin ) {
 							if(dt === "xml") { addXmlData(data,ts.grid.bDiv,rcnt,npage>1,adjust); }
 							else { addJSONData(data,ts.grid.bDiv,rcnt,npage>1,adjust); }
 							
-							// 검색결과 없을 때 메시지 출력
+							// 검색결과 없을 때 메시지 출력 lmw
 							if (data.total === 0) {
 								$(ts).addRowData('no-data', {});
 								$(ts).find("#no-data").find("td").eq(0).attr("colspan", $(ts).jqGrid('getGridParam', 'colNames').length).html('<span>no search data.</span>');

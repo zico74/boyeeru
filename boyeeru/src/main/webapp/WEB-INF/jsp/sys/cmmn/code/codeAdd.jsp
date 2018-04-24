@@ -135,6 +135,8 @@ $(document).ready(function() {
 	 
 	      });
 		console.log($('form[name=add]'));
-	})
+	});
+	
+	console.log(1);
 });
 </script>

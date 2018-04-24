@@ -10,5 +10,6 @@
 
 		<typeAlias alias="people" type="com.boyeeru.adios.web.model.mng.people.People"/>
 		<typeAlias alias="code" type="com.boyeeru.adios.web.model.sys.cmmn.code.Code"/>
+		<typeAlias alias="treeCode" type="com.boyeeru.adios.web.model.sys.cmmn.code.TreeCode"/>
 	</typeAliases>
 </configuration>

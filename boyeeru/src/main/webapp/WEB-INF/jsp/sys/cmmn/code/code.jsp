@@ -1,10 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<!DOCTYPE html>
+<html lang="ko">
+<head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=1100">
+<%@ include file="/WEB-INF/jsp/include/header.jsp"%>
+<%@ include file="/WEB-INF/jsp/include/adminHeader.jsp"%>
+<title>Insert title here</title>
+<script type="text/javascript">
+</script>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
 
+  <header class="main-header">
 
+    <!-- Logo -->
+    <%@ include file="/WEB-INF/jsp/include/layout/upptLogo.jsp"%>
 
+    <!-- Header Navbar: style can be found in header.less -->
+    <%@ include file="/WEB-INF/jsp/include/layout/upptNavbar.jsp"%>
+    
+  </header>
+  
+  <!-- Left side column. contains the logo and sidebar -->
+  <%@ include file="/WEB-INF/jsp/include/layout/lftMenu.jsp"%>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        boyeeru-jqgrid
+        <small>Version 1.0</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
 <div class="row">
 <div class="col-md-12">
           <!-- Horizontal Form -->
@@ -21,11 +63,11 @@
             <!-- /.box-header -->
             <!-- form start -->
               <div class="box-body">
-            <form class="form-horizontal">
+            <form class="form-horizontal" name='zzz'>
                 <div class="form-group">
                   <label for="groupCodeId" class="col-sm-2 control-label">그룹코드ID</label>
                   <div class="col-sm-4">
-                    <input type="text" class="form-control" id="groupCodeId" placeholder="그룹코드ID">
+                    <input type="text" class="form-control" name='groupCodeId' id="groupCodeId" placeholder="그룹코드ID">
                   </div>
                   <label for="groupCodeNm" class="col-sm-2 control-label">그룹코드명</label>
                   <div class="col-sm-4">
@@ -67,7 +109,7 @@
               <!-- /.box-body -->
               <div class="box-footer">
                 <button type="button" class="btn btn-default">초기화</button>
-                <button type="button" class="btn btn-info pull-right"><i class="fas fa-search"></i> 조회</button>
+                <button type="button" id='search' class="btn btn-info pull-right"><i class="fas fa-search"></i> 조회</button>
                 <button type="button" id='add' class="btn btn-success pull-right" style='margin-right: 1em;'><i class="fas fa-plus"></i> 신규추가</button>
               
               <div id="dialog-form" title="공통코드 추가">
@@ -110,7 +152,8 @@
                   <p class="text-center">
                     <strong>가조쿠</strong>
                   </p>
-
+                  <table id="codeGrid"></table>
+                  <div id="codeGridPager"></div>
                   <table id="list"></table>
 					<div id="pager"></div>
                 </div>
@@ -164,24 +207,31 @@
           <!-- /.box -->
         </div>
         </div>
+      <!-- /.row -->
+
+      <!-- Main row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+	<!-- footer info -->
+  <%@ include file="/WEB-INF/jsp/include/layout/lwptInfo.jsp"%>
+
+  <!-- Control Sidebar -->
+  <%@ include file="/WEB-INF/jsp/include/layout/rghtSlider.jsp"%>
+
+</div>
+<!-- ./wrapper -->
+<%@ include file="/WEB-INF/jsp/include/adminFooter.jsp"%>
+
 <script type="text/javascript">
 $(document).ready(function() {
-	$("#list").grid({
+	$("#list").mwGrid({
 	   	url:"<c:url value='/sys/cmmn/codeJqGrid' />",
+	   	datatype : "json",
 	   	colNames:['#', 'GROUP_CODE_ID', 'GROUP_CODE_NM', 'INFO', 'USE_AT'],
 	   	colModel:[
-	   		{name: '_selRow', index: '_selRow', width: 40, align: 'center', editable:false, edittype:"radio"
-				, sortable:false
-				, classes:'pss-jqgrid-pointer-nodecoration'
-				, formatter: function (cellValue, option) {
-					return '<input type="radio" name="radio_' + option.gid + '"  />';
-				}
-// 				cellattr: function(rowId, tv, rawObject, cm, rdata) {
-// 					var length = $(this).jqGrid('getGridParam','colNames');
-// 					console.log(length);
-// 			         return ' colspan=2'; 
-// 			    }
-	   		},
 	   		{name: 'groupCodeId', index: 'GROUP_CODE_ID'},
 	   		{name: 'groupCodeNm', index: 'GROUP_CODE_NM'},
 	   		{name: 'info', index: 'INFO'},
@@ -191,11 +241,16 @@ $(document).ready(function() {
 // 	   		        return ' style="display:none;"';
 // 	   		    }}
 	   	],
-	   	onCellSelect: function (rowid, iCol, content, event) {
-	   		$(this).find("#" + rowid).find("input[name=radio_list]").prop('checked', true);
+	   	useRadio : true,
+	   	onSelectRow : function (rowid, status, e) {
+	   		$(this).find('#' + rowid).find('input[name=radio_list]').prop('checked', true);
+	   		
 	   		var param = $(this).jqGrid('getGridParam', 'selrow');
+	   		
 	   		console.log(param);
-	   		console.log($(this).getRowData(param));
+	   		console.log($(this).getRowData(rowid));
+	   	},
+	   	onCellSelect : function (rowid, iCol, cellcontent, e) {
 	   	},
 	   	loadComplete: function(data) {
     		},
@@ -227,6 +282,12 @@ $(document).ready(function() {
 		dialog.dialog( "open" );
 	});
 	
-	$('.box').boxWidget();
+	$('#search').on('click', function (e) {
+		console.log($('form[name=zzz]').serialize());
+		$("#list").trigger("reloadGrid")
+	});
 });
 </script>
+
+</body>
+</html>

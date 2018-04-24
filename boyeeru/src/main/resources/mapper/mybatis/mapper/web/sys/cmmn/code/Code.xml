@@ -17,7 +17,31 @@
       WHERE NUM &gt;= ${startCount}
 	</select>
 	
+	<select id="findByTreeCode" parameterType="jqGrid" resultType="treeCode">
+select GROUP_CODE_ID
+,CODE_ID
+,GROUP_CODE_NM
+,CODE_NM
+,SORT_ORDR
+,PARNTS_GROUP_CODE_ID
+,PARNTS_CODE_ID
+,ESTN_ATRB_1
+,ESTN_ATRB_2
+,USE_AT
+,RGSDE
+,UPDDE
+,REG_NM, level - 1 AS "LEVEL", decode(connect_by_isleaf, '0', 'false', '1', 'true') AS IS_LEAF
+, 'false' AS IS_EXPANDED
+from tb_cmmn_code start with GROUP_CODE_ID = '000'
+connect by GROUP_CODE_ID = prior code_id
+	</select>
+	
 	<select id="findByCodeTotal" parameterType="jqGrid" resultType="int">
+    SELECT COUNT(*)
+      FROM TB_CMMN_CODE
+    </select>
+    
+	<select id="findByTreeCodeTotal" parameterType="jqGrid" resultType="int">
     SELECT COUNT(*)
       FROM TB_CMMN_CODE
     </select>
