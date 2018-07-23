@@ -71,33 +71,43 @@
                   </div>
                   <label for="groupCodeNm" class="col-sm-2 control-label">그룹코드명</label>
                   <div class="col-sm-4">
-                    <input type="text" class="form-control" id="groupCodeNm" placeholder="그룹코드명">
+                    <input type="text" class="form-control" name='groupCodeNm' id="groupCodeNm" placeholder="그룹코드명">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="codeId" class="col-sm-2 control-label">코드ID</label>
                   <div class="col-sm-4">
-                    <input type="text" class="form-control" id="codeId" placeholder="코드ID">
+                    <input type="text" class="form-control" name='codeId' id="codeId" placeholder="코드ID">
                   </div>
                   <label for="codeNm" class="col-sm-2 control-label">코드명</label>
                   <div class="col-sm-4">
-                    <input type="text" class="form-control" id="codeNm" placeholder="코드명">
+                    <input type="text" class="form-control" name='codeNm' id="codeNm" placeholder="코드명">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="estnAtrb1" class="col-sm-2 control-label">확장속성1</label>
                   <div class="col-sm-4">
-                    <input type="text" class="form-control" id="estnAtrb1" placeholder="확장속성1">
+                    <input type="text" class="form-control" name='estnAtrb1' id="estnAtrb1" placeholder="확장속성1">
                   </div>
                   <label for="estnAtrb2" class="col-sm-2 control-label">확장속성2</label>
                   <div class="col-sm-4">
-                    <input type="text" class="form-control" id="estnAtrb2" placeholder="확장속성2">
+                    <input type="text" class="form-control" name='estnAtrb2' id="estnAtrb2" placeholder="확장속성2">
                   </div>
                 </div>
                 <div class="form-group">
                 <label for="useAt" class="col-sm-2 control-label">사용여부</label>
                 <div class="col-sm-4">
-                <select class="form-control select2" id='useAt'>
+                <select class="form-control select2" id='useAt' name='useAt'>
+                  <option selected="selected" value='all'>전체</option>
+                  <option value='Y'>Y</option>
+                  <option value='N'>N</option>
+                </select>
+                <select class="form-control select2" id='useAt2' name='useAt'>
+                  <option selected="selected" value='all'>전체</option>
+                  <option value='Y'>Y</option>
+                  <option value='N'>N</option>
+                </select>
+                <select class="form-control select2" id='useAt3' name='useAt'>
                   <option selected="selected" value='all'>전체</option>
                   <option value='Y'>Y</option>
                   <option value='N'>N</option>
@@ -123,10 +133,10 @@
           
           <!-- /.box -->
         </div>
-<div class="col-md-12">
+		<div class="col-md-12">
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Monthly Recap Report</h3>
+              <h3 class="box-title">공통코드 리스트</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -242,6 +252,8 @@ $(document).ready(function() {
 // 	   		    }}
 	   	],
 	   	useRadio : true,
+	   	rowNum : 2,
+	   	postData : $('form[name=zzz]').serializeObject(),
 	   	onSelectRow : function (rowid, status, e) {
 	   		$(this).find('#' + rowid).find('input[name=radio_list]').prop('checked', true);
 	   		
@@ -283,8 +295,11 @@ $(document).ready(function() {
 	});
 	
 	$('#search').on('click', function (e) {
-		console.log($('form[name=zzz]').serialize());
-		$("#list").trigger("reloadGrid")
+		console.log($('form[name=zzz]').serializeObject());
+		console.log($('#list').getGridParam());
+		$("#list").setGridParam({
+			postData : $('form[name=zzz]').serializeObject()
+		}).trigger("reloadGrid")
 	});
 });
 </script>

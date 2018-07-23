@@ -1,7 +1,7 @@
 /**
  * 
  */
-(function($) {
+;(function($) {
 	"use strict";
 
 	$.mwgrid = $.mwgrid || {};
@@ -103,6 +103,8 @@
 
 	$.fn.grid.defaultOptn = {
 		url : "",
+		height : "100%",
+		width : "100%",
 		datatype : "json",
 		jsonReader : {
 			page : "page",
